@@ -176,13 +176,13 @@ def turnkey():
         if not writeTextfile(outfile, content, 'w'):
             return 1
 
-#    # linking nginx config
-#    try:
-#        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-#    except OSError:
-#        pass
-#    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-#    os.system("/etc/init.d/nginx restart")
+    # linking nginx config
+    try:
+        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+    except OSError:
+        pass
+    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+    os.system("/etc/init.d/nginx restart")
 
     return 0
 ## functions end
