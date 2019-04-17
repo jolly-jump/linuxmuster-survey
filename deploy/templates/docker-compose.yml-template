@@ -1,0 +1,35 @@
+# ./docker-compose.yml
+version: '2'
+services:
+  db:
+    image: mariadb
+    restart: always
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: @@DB_ROOT_PW@@
+    volumes:
+      - ./mariadb-data:/var/lib/mysql
+
+  feedback:
+    depends_on:
+      - db
+    container_name: @@CONTAINERNAME@@
+    restart: always
+    image: hgkvplan/limesurvey:latest
+    environment:
+        LIME_DB_HOST: db
+        LIME_DB_PORT: 3306
+        LIME_DB_USER: dbuser
+        LIME_DB_PASSWORD: @@DBUSER_PASSWORD@@
+        LIME_DB_NAME: lime_@@CONTAINERNAME@@
+        LIME_ADMIN: @@ADMINUSER@@
+        LIME_ADMIN_PW: @@ADMINPW@@
+        LIME_ADMIN_MAIL: @@ADMINMAIL@@
+        MYSQL_ROOT_PASSWORD: @@DB_ROOT_PW@@
+    ports:
+      - "127.0.0.1:@@LOCALPORT@@:80"
+    dns: 10.16.1.1
+    volumes:
+      - ./config/config-@@CONTAINERNAME@@.php:/var/www/html/application/config/config.php
+      - ./config/ldap-@@CONTAINERNAME@@.php:/var/www/html/application/config/ldap.php
+      - ./dbdumps/:/var/linuxmuster-limesurvey
