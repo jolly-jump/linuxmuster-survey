@@ -194,13 +194,13 @@ def turnkey():
     ## feed the extra rights an patch, if necessary the AuthLDAP.php
 
 
-#    # linking nginx config
-#    try:
-#        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-#    except OSError:
-#        pass
-#    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-#    os.system("/etc/init.d/nginx restart")
+    # linking nginx config
+    try:
+        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+    except OSError:
+        pass
+    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+    os.system("/etc/init.d/nginx restart")
 
     return 0
 ## functions end
