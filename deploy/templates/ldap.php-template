@@ -24,7 +24,7 @@
 /*********************************************/
 putenv("LDAPTLS_REQCERT=@@LDAPREQCERT@@");
 $serverId = 0;
-$ldap_server[$serverId]['server'] = "@@LDAPSERVER@@";
+$ldap_server[$serverId]['server'] = "@@LDAPS@@://@@LDAPSERVER@@";
 $ldap_server[$serverId]['port'] = "@@LDAPPORT@@";
 $ldap_server[$serverId]['protoversion'] = "ldapv3";
 $ldap_server[$serverId]['encrypt'] = "none";

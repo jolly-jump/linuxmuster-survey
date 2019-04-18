@@ -118,7 +118,8 @@ def turnkey():
         localport = setup.get('setup', 'localport')
         adminuser = setup.get('setup', 'adminuser')
         adminpw = setup.get('setup', 'adminpw')
-        adminmail = setup.get('setup', 'adminmail')        
+        adminmail = setup.get('setup', 'adminmail')
+        extrarights = setup.get('setup', 'ldapusers_extra_rights')                
     except:
         print ('*** Error reading config file.')
         return 1
@@ -152,8 +153,13 @@ def turnkey():
             return 1
 
         # replace placeholders
-        content = content.replace('@@LDAPSERVER@@', ldapserver)
         content = content.replace('@@LDAPPORT@@', ldapport)
+        if (ldapport== "636"):
+            content = content.replace('@@LDAPSERVER@@', ldapserver)
+            content = content.replace('@@LDAPS@@', "ldaps")                
+        else:
+            content = content.replace('@@LDAPSERVER@@', ldapserver)            
+            content = content.replace('@@LDAPS@@', "ldap")
         content = content.replace('@@LDAPREQCERT@@', ldapreqcert)
         content = content.replace('@@BASEDN@@', basedn)
         content = content.replace('@@SCHOOLNAME@@', schoolname)
@@ -165,7 +171,16 @@ def turnkey():
         content = content.replace('@@LOCALPORT@@', localport)
         content = content.replace('@@ADMINUSER@@', adminuser)
         content = content.replace('@@ADMINPW@@', adminpw)
-        content = content.replace('@@ADMINMAIL@@', adminmail)        
+        content = content.replace('@@ADMINMAIL@@', adminmail)
+        if (extrarights == "read"):
+            content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'surveys', array('create_p', 'read_p')");
+        elif (extrarights == "write"):
+            content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'surveys', array('create_p', 'read_p', 'update_p', 'delete_p', 'export_p')");
+        elif (extrarights == "superadmin"):
+            content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'superadmin', array('read_p')");
+        else:
+            content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'surveys', array('create_p')");
+                
         # extract oufile path from first line
         # and remove first line
         firstline = re.findall(r'# .*\n', content)[0]
@@ -176,13 +191,16 @@ def turnkey():
         if not writeTextfile(outfile, content, 'w'):
             return 1
 
-    # linking nginx config
-    try:
-        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-    except OSError:
-        pass
-    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-    os.system("/etc/init.d/nginx restart")
+    ## feed the extra rights an patch, if necessary the AuthLDAP.php
+
+
+#    # linking nginx config
+#    try:
+#        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+#    except OSError:
+#        pass
+#    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+#    os.system("/etc/init.d/nginx restart")
 
     return 0
 ## functions end

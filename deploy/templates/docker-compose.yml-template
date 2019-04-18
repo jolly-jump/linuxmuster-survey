@@ -32,4 +32,6 @@ services:
     volumes:
       - ./config/config-@@CONTAINERNAME@@.php:/var/www/html/application/config/config.php
       - ./config/ldap-@@CONTAINERNAME@@.php:/var/www/html/application/config/ldap.php
+      - ./config/AuthLDAP.php:/var/www/html/application/core/plugins/AuthLDAP/AuthLDAP.php
+      - ./config/changes.sql:/usr/share/linuxmuster-limesurvey/changes.sql
       - ./dbdumps/:/var/linuxmuster-limesurvey
