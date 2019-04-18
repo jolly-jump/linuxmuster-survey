@@ -1,6 +1,24 @@
 # ./config/changes.sql
 use lime_@@CONTAINERNAME@@;
-UPDATE lime_plugins SET active=1 WHERE name="AuthLDAP";
+
+DROP TABLE IF EXISTS `lime_plugins`;
+CREATE TABLE `lime_plugins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` int(11) NOT NULL DEFAULT 0,
+  `version` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+   PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `lime_plugins` (`id`,`name`,`active`,`version`) VALUES
+('1', 'Authdb', '1', NULL),
+('2', 'AuditLog', '0', NULL),
+('3', 'Authwebserver', '0', NULL),
+('4', 'AuthLDAP', '1', NULL),
+('5', 'ExportR', '0', NULL),
+('6', 'oldUrlCompat', '0', NULL),
+('7', 'ExportSTATAxml', '0', NULL);
+
 DROP TABLE IF EXISTS `lime_plugin_settings`;
 CREATE TABLE `lime_plugin_settings` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -10,7 +28,7 @@ CREATE TABLE `lime_plugin_settings` (
   `key` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `lime_plugin_settings`
