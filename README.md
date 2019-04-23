@@ -16,14 +16,19 @@ Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B
 
 * Lege einen DNS Eintrag für deine Dockerapp, z.B. feedback.meine-schule.tld, der auf die IP des Dockerhosts zeigt. Das darf auch ein CNAME sein.
 
+### Voraussetzungen
+
+- installiere python3-ldap3 ``apt install python3-ldap3``
+
 ### App herunterladen, konfigurieren und starten
 
 * Klone dieses Repo auf deinen Dockerhost nach ``/srv/docker``
   * ``cd /srv/docker``
-  * ``git clone https://github.com/linuxmuster-ext-docker/linuxmuster-survey`` (momentan noch: https://github.com/jolly-jump/linuxmuster-survey)
+  * ``git clone https://github.com/jolly-jump/linuxmuster-survey``
 * Wechsle in das App-Verzeichnis: ``cd linuxmuster-survey``
 * Passe die Werte in der Datei ``limesurvey.ini`` an.
 * Erzeuge eine Konfiguration mit: ``./deploy/bin/turnkey -c limesurvey.ini``
+* Führe ``dehydrated -c`` aus, um für diese Domäne ein LE-Zertifikat zu besorgen
 * Starte die App mit dem Befehl ``docker-compose up -d``
 
 Jetzt solltest du dich an deinem Limesurvey unter der Adresse https://feedback.meine-schule.de/ anmelden können, so wie du deinen Service-Host und deine Service-Domain gewählt und konfiguriert hast.
