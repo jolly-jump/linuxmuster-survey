@@ -119,6 +119,7 @@ def turnkey():
         adminuser = setup.get('setup', 'adminuser')
         adminpw = setup.get('setup', 'adminpw')
         adminmail = setup.get('setup', 'adminmail')
+        users = setup.get('setup', 'ldapusers')                        
         extrarights = setup.get('setup', 'ldapusers_extra_rights')                
     except:
         print ('*** Error reading config file.')
@@ -172,6 +173,12 @@ def turnkey():
         content = content.replace('@@ADMINUSER@@', adminuser)
         content = content.replace('@@ADMINPW@@', adminpw)
         content = content.replace('@@ADMINMAIL@@', adminmail)
+        if (ldapusers == "teachersonly"):
+            content = content.replace('@@LDAPGROUP@@', "ou=groups,"+basedn)
+            content = content.replace('@@LDAPGROUPFILTER@@', "(&(cn=teachers)(memberUid=$username))")
+        else:
+            content = content.replace('@@LDAPGROUP@@', "")
+            content = content.replace('@@LDAPGROUPFILTER@@', "(&(cn=teachers)(memberUid=$username))")
         if (extrarights == "read"):
             content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'surveys', array('create_p', 'read_p')");
         elif (extrarights == "write"):
@@ -180,7 +187,7 @@ def turnkey():
             content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'superadmin', array('read_p')");
         else:
             content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'surveys', array('create_p')");
-                
+
         # extract oufile path from first line
         # and remove first line
         firstline = re.findall(r'# .*\n', content)[0]
@@ -191,16 +198,14 @@ def turnkey():
         if not writeTextfile(outfile, content, 'w'):
             return 1
 
-    ## feed the extra rights an patch, if necessary the AuthLDAP.php
 
-
-    # linking nginx config
-    try:
-        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-    except OSError:
-        pass
-    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
-    os.system("/etc/init.d/nginx restart")
+#    # linking nginx config
+#    try:
+#        os.remove("/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+#    except OSError:
+#        pass
+#    os.symlink(os.getcwd()+"/config/nginx."+servicehost+".conf","/etc/nginx/sites-enabled/"+servicehost+"."+servicedomain)
+#    os.system("/etc/init.d/nginx restart")
 
     return 0
 ## functions end

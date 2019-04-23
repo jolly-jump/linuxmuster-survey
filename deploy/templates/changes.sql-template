@@ -53,7 +53,7 @@ INSERT INTO `lime_plugin_settings` (`id`,`plugin_id`,`model`,`model_id`,`key`,`v
 ('16', '4', NULL, NULL, 'is_default', '\"1\"'),
 ('17', '4', NULL, NULL, 'autocreate', '\"1\"'),
 ('18', '4', NULL, NULL, 'automaticsurveycreation', '\"1\"'),
-('19', '4', NULL, NULL, 'groupsearchbase', '\"\"'),
-('20', '4', NULL, NULL, 'groupsearchfilter', '\"\"'),
+('19', '4', NULL, NULL, 'groupsearchbase', '\"@@LDAPGROUP@@\"'),
+('20', '4', NULL, NULL, 'groupsearchfilter', '\"@@LDAPGROUPFILTER@@\"'),
 ('21', '4', NULL, NULL, 'allowInitialUser', '\"1\"');
 
