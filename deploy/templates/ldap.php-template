@@ -93,7 +93,7 @@ $ldap_queries[$query_id]['language'] = '';
 $ldap_queries[$query_id]['attr1'] = 'gidnumber';
 $ldap_queries[$query_id]['attr2'] = '';
 
-
+//@@PARTICIPANTS@@
 
 //DO NOT CHANGE BELOW HERE --------------------
 
