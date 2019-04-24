@@ -20,7 +20,7 @@ Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B
 
 ### Voraussetzungen
 
-- installiere python3-ldap3 ``apt install python3-ldap3``
+- installiere python3-ldap3 ``apt install python3-ldap3`` auf dem docker-host
 
 ### App herunterladen, konfigurieren und starten
 
