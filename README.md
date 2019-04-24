@@ -15,6 +15,8 @@ Entweder du hast schon einen Dockerhost mit docker, docker-compose, dehydrated u
 Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B. feedback.meine-schule.tld
 
 * Lege einen DNS Eintrag für deine Dockerapp, z.B. feedback.meine-schule.tld, der auf die IP des Dockerhosts zeigt. Das darf auch ein CNAME sein.
+* Trage diesen Host in die Datei ``/etc/dehydrated/domains.txt`` ein.
+* Führe den Befehl ``dehydrated -c`` aus. Jetzt hast du die Zertifikate im Verzeichnis /var/lib/dehydrated/certs/<hostname>/ zur Verfügung, der Docker Host aktualisiert diese per Cronjob.
 
 ### Voraussetzungen
 
