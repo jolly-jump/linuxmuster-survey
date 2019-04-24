@@ -28,11 +28,19 @@ Zuerst musst du dir einen Dienstenamen ausdenken und ein SSL-Zertifikat besorgen
   * ``cd /srv/docker``
   * ``git clone https://github.com/jolly-jump/linuxmuster-survey``
 * Wechsle in das App-Verzeichnis: ``cd linuxmuster-survey``
-* Passe die Werte in der Datei ``limesurvey.ini`` an.
+* Passe die Werte in der Datei ``limesurvey.ini`` an ([siehe unten](#anpassung-der-limesurveyini))
 * Erzeuge eine Konfiguration mit: ``./deploy/bin/turnkey -c limesurvey.ini``
 * Starte die App mit dem Befehl ``docker-compose up -d``
 
-Jetzt solltest du dich an deinem Limesurvey unter der Adresse https://feedback.meine-schule.de/ anmelden können, so wie du deinen Service-Host und deine Service-Domain gewählt und konfiguriert hast.
+Jetzt solltest du dich an deinem Limesurvey unter der Adresse https://feedback.meine-schule.de/admin anmelden können.
+
+Entweder als ``limeadmin`` oder wie du deinen Administrator in der .ini-Datei genannt hast, dafür muss die interne Datenbank ausgewählt werden.
+
+![Login als limeadmin](/docs/login-internal.png)
+
+Oder als Lehrer mit deinem Benutzernamen und Passwort der Schule über LDAP,
+
+![Login als Lehrer](/docs/login-ldap.png)
 
 ### Anpassung der limesurvey.ini
 
