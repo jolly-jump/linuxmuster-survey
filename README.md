@@ -8,11 +8,11 @@ TESTVERSION - **NICHT PRODUKTIV VERWENDEN**
 
 ## Verwendung
 
-Entweder du hast schon einen Dockerhost mit docker, docker-compose, dehydrated und nginx oder du erzeugst dirkurz einen Dockerhost mit create-docker-host: https://github.com/linuxmuster-ext-docker/create-docker-host
+Entweder du hast schon einen Dockerhost mit docker, docker-compose, dehydrated und nginx oder du erzeugst dir kurz einen Dockerhost mit create-docker-host: https://github.com/linuxmuster-ext-docker/create-docker-host
 
 ### Dienstenamen und Zertifikat
 
-Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B. feedback.meine-schule.tld
+Zuerst musst du dir einen Dienstenamen ausdenken und ein SSL-Zertifikat besorgen. Also z.B. feedback.meine-schule.tld
 
 * Lege einen DNS Eintrag für deine Dockerapp, z.B. feedback.meine-schule.tld, der auf die IP des Dockerhosts zeigt. Das darf auch ein CNAME sein.
 * Trage diesen Host in die Datei ``/etc/dehydrated/domains.txt`` ein.
@@ -30,7 +30,6 @@ Zuerst musst du dir Dienstenamen ausdenken und SSL-Zertifikat besorgen. Also z.B
 * Wechsle in das App-Verzeichnis: ``cd linuxmuster-survey``
 * Passe die Werte in der Datei ``limesurvey.ini`` an.
 * Erzeuge eine Konfiguration mit: ``./deploy/bin/turnkey -c limesurvey.ini``
-* Führe ``dehydrated -c`` aus, um für diese Domäne ein LE-Zertifikat zu besorgen
 * Starte die App mit dem Befehl ``docker-compose up -d``
 
 Jetzt solltest du dich an deinem Limesurvey unter der Adresse https://feedback.meine-schule.de/ anmelden können, so wie du deinen Service-Host und deine Service-Domain gewählt und konfiguriert hast.
@@ -39,7 +38,10 @@ Jetzt solltest du dich an deinem Limesurvey unter der Adresse https://feedback.m
 
 #### Abschnitt [setup]
 
-* Die Variable "ldapusers" schränkt die Einloggmöglichkeit auf Lehrer ein (standard) oder hebt die Einschränkung mit dem Wert "all" auf.
+* Die Variable "ldapusers" schränkt die Einloggmöglichkeit auf Lehrer ein (Standard) oder hebt die Einschränkung mit dem Wert "all" auf.
+```
+ldapusers=
+```
 * Die Variable "ldapusers_extra_rights" bestimmt, was die LDAP user beim ersten Einloggen dürfen:
 ```
 # LDAP User bekommen automatisch bei erstem Login folgende Rechte
