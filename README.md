@@ -82,3 +82,16 @@ p_sudo
 6b
 6c
 ```
+
+## Einschränkungen
+
+- Man sollte wissen, dass dieses Image von der Community gepflegt wird
+  und daher genauso gut ist, wie der/die Ersteller es
+  pflegen. Hinweise/issues etc. herzlich willkommen. Am besten über
+  https://ask.linuxmuster.net/t/linuxmuster-survey/3505
+
+- Alles was in der Datenbank gespeichert wird, wird bei einem Update
+  des Images von limesurvey übernommen/migriert. Alles was auf der
+  Festplatte landet, wird von einem neuen Image überschrieben bzw. man
+  muss sich selbst um ein Backup/Recovery kümmmern. Dazu gehören
+  eigene Themes inkl. Logos etc.
