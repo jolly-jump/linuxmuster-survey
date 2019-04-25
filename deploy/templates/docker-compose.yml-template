@@ -2,7 +2,6 @@
 version: '2'
 services:
   db:
-    image: mariadb
     restart: always
     image: mariadb:latest
     environment:
@@ -13,7 +12,7 @@ services:
   feedback:
     depends_on:
       - db
-    container_name: @@CONTAINERNAME@@
+    #container_name: @@CONTAINERNAME@@
     restart: always
     image: hgkvplan/limesurvey:latest
     environment:
