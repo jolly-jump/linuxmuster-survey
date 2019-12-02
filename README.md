@@ -2,13 +2,19 @@
 
 Limesurvey Docker App für linuxmuster. 
 
-Die Idee ist Limesurvey als Umfrage und Feedback-Tool zu verwenden. Die Standardkonfiguration sieht vor, dass sich Lehrer anmelden und loslegen können und dass Schüler bei Bedarf (zum Beispiel für nicht-anonyme Umfragen) Klassen/Projektweise vordefiniert existieren und nur noch als Teilnehmer zu einer Umfrage hinzugefügt werden müssen.
-
-TESTVERSION - **NICHT PRODUKTIV VERWENDEN**
+Die Idee ist Limesurvey als Umfrage und Feedback-Tool zu
+verwenden. Die Standardkonfiguration sieht vor, dass sich Lehrer
+anmelden und loslegen können und dass Schüler bei Bedarf (zum Beispiel
+für nicht-anonyme Umfragen) klassen-/projektweise vordefiniert
+existieren und nur noch als Teilnehmer zu einer Umfrage hinzugefügt
+werden müssen.
 
 ## Verwendung
 
-Entweder du hast schon einen Dockerhost mit docker, docker-compose, dehydrated und nginx oder du erzeugst dir kurz einen Dockerhost mit create-docker-host: https://github.com/linuxmuster-ext-docker/create-docker-host
+Entweder du hast schon einen Dockerhost mit docker, docker-compose,
+dehydrated und nginx oder du erzeugst dir kurz einen Dockerhost mit
+create-docker-host:
+https://github.com/linuxmuster-ext-docker/create-docker-host
 
 ### Dienstenamen und Zertifikat
 
@@ -42,7 +48,7 @@ Oder als Lehrer mit deinem Benutzernamen und Passwort der Schule über LDAP,
 
 ![Login als Lehrer](/docs/login-ldap.png)
 
-### Anpassung der limesurvey.ini
+### Anpassung der limesurvey.ini für v6.2
 
 #### Abschnitt [setup]
 
