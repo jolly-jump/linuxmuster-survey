@@ -1,0 +1,20 @@
+# ./config/ldap-groups.php
+$query_id++;
+$ldap_queries[$query_id]['ldapServerId'] = 0;
+$ldap_queries[$query_id]['name'] = 'Schüler der @@GROUP@@';
+$ldap_queries[$query_id]['groupbase'] = '@@BASEDN@@';
+$ldap_queries[$query_id]['groupfilter'] = '(&(cn=@@GROUP@@)(objectclass=group))';
+$ldap_queries[$query_id]['groupscope'] = 'sub';
+$ldap_queries[$query_id]['groupmemberattr'] = 'member';
+$ldap_queries[$query_id]['groupmemberisdn'] = TRUE;
+$ldap_queries[$query_id]['useridattr'] = 'samccountname';
+$ldap_queries[$query_id]['userbase'] = '@@BASEDN@@';
+$ldap_queries[$query_id]['userfilter'] = '(&(sophomorixRole=student)(!(samaccountname=ymca))(!(samaccountname=zztop)))';
+$ldap_queries[$query_id]['userscope'] = 'sub';
+$ldap_queries[$query_id]['firstname_attr'] = 'givenname';
+$ldap_queries[$query_id]['lastname_attr'] = 'sn';
+$ldap_queries[$query_id]['email_attr'] = 'mail';
+$ldap_queries[$query_id]['token_attr'] = '';
+$ldap_queries[$query_id]['language'] = '';
+$ldap_queries[$query_id]['attr1'] = '';
+$ldap_queries[$query_id]['attr2'] = '';

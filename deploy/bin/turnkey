@@ -110,6 +110,7 @@ def turnkey():
         containername = setup.get('setup', 'containername')
         lmnversion = setup.get('setup', 'lmnversion')
         ldapserver = setup.get('setup', 'ldapserver')
+        ldapserverip = setup.get('setup', 'ldapserverip')        
         ldapport = setup.get('setup', 'ldapport')
         ldapreqcert = setup.get('setup', 'ldapreqcert')        
         basedn = setup.get('setup', 'basedn')
@@ -160,6 +161,7 @@ def turnkey():
     for group in participant_groups:
 
         if conn.search(basedn, '(cn=%s)' % group , attributes=["gidNumber"]):
+            ## TODO für v7 muss noch angepasst werden
             print("  + Added group %s " % group)
             #print(conn.entries[0]['gidNumber'])
         else:
@@ -200,8 +202,12 @@ def turnkey():
         else:
             content = content.replace('@@LDAPSERVER@@', ldapserver)            
             content = content.replace('@@LDAPS@@', "ldap")
+        content = content.replace('@@SERVERIP@@', ldapserverip)            
         content = content.replace('@@LDAPREQCERT@@', ldapreqcert)
         content = content.replace('@@BASEDN@@', basedn)
+        content = content.replace('@@LDAPBINDUSER@@', binduser)
+        content = content.replace('@@LDAPBINDUSERPW@@', binduserpw)
+
         content = content.replace('@@SCHOOLNAME@@', schoolname)
         content = content.replace('@@DBUSER_PASSWORD@@', mysqluserpw)
         content = content.replace('@@DB_ROOT_PW@@', mysqlrootpw)

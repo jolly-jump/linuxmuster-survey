@@ -1,0 +1,78 @@
+# ./config/changes.sql
+use lime_@@CONTAINERNAME@@;
+
+DROP TABLE IF EXISTS `lime_plugins`;
+DROP TABLE IF EXISTS `lime_plugins`;
+CREATE TABLE `lime_plugins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` int(11) NOT NULL DEFAULT 0,
+  `version` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `load_error` int(11) DEFAULT 0,
+  `load_error_message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `plugin_type` varchar(6) COLLATE utf8mb4_unicode_ci DEFAULT 'user',
+  `priority` int(11) NOT NULL DEFAULT 0,
+   PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO `lime_plugins` VALUES
+(1,'PasswordRequirement',1,'1.0.0',0,NULL,'core',0),
+(2,'AuthLDAP',1,'1.0.0',0,NULL,'core',0),
+(3,'AuditLog',0,'1.0.0',0,NULL,'core',0),
+(4,'Authwebserver',0,'1.0.0',0,NULL,'core',0),
+(5,'ExportR',0,'1.0.0',0,NULL,'core',0),
+(6,'ExportSTATAxml',1,'1.0.0',0,NULL,'core',0),
+(7,'oldUrlCompat',0,'1.0.0',0,NULL,'core',0),
+(8,'expressionQuestionHelp',0,'1.0.0',0,NULL,'core',0),
+(9,'expressionQuestionForAll',0,'1.0.0',0,NULL,'core',0),
+(10,'expressionFixedDbVar',0,'1.0.0',0,NULL,'core',0),
+(11,'customToken',0,'1.0.1',0,NULL,'core',0),
+(12,'mailSenderToFrom',0,'1.0.0',0,NULL,'core',0);
+
+#INSERT INTO `lime_plugins` (`id`,`name`,`active`,`version`) VALUES
+#('1', 'Authdb', '1', NULL),
+#('2', 'AuditLog', '0', NULL),
+#('3', 'Authwebserver', '0', NULL),
+#('4', 'AuthLDAP', '1', NULL),
+#('5', 'ExportR', '0', NULL),
+#('6', 'oldUrlCompat', '0', NULL),
+#('7', 'ExportSTATAxml', '0', NULL);
+
+DROP TABLE IF EXISTS `lime_plugin_settings`;
+CREATE TABLE `lime_plugin_settings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `plugin_id` int(11) NOT NULL,
+  `model` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `model_id` int(11) DEFAULT NULL,
+  `key` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `lime_plugin_settings`
+--
+
+INSERT INTO `lime_plugin_settings` VALUES
+('1', '2', NULL, NULL, 'server', '\"@@LDAPS@@:\\/\\/@@LDAPSERVER@@\"'),
+('2', '2', NULL, NULL, 'ldapport', '\"@@LDAPPORT@@\"'),
+('3', '2', NULL, NULL, 'ldapversion', '\"3\"'),
+('4', '2', NULL, NULL, 'ldapoptreferrals', '\"0\"'),
+('5', '2', NULL, NULL, 'ldaptls', '\"0\"'),
+('6', '2', NULL, NULL, 'ldapmode', '\"searchandbind\"'),
+('7', '2', NULL, NULL, 'userprefix', 'null'),
+('8', '2', NULL, NULL, 'domainsuffix', 'null'),
+('9', '2', NULL, NULL, 'searchuserattribute', '\"samAccountName\"'),
+('10', '2', NULL, NULL, 'usersearchbase', '\"@@BASEDN@@\"'),
+('11', '2', NULL, NULL, 'extrauserfilter', '\"\"'),
+('12', '2', NULL, NULL, 'binddn', '\"@@LDAPBINDUSER@@\"'),
+('13', '2', NULL, NULL, 'bindpwd', '\"@@LDAPBINDUSERPW@@\"'),
+('14', '2', NULL, NULL, 'mailattribute', '\"mail\"'),
+('15', '2', NULL, NULL, 'fullnameattribute', '\"displayName\"'),
+('16', '2', NULL, NULL, 'is_default', '\"1\"'),
+('17', '2', NULL, NULL, 'autocreate', '\"1\"'),
+('18', '2', NULL, NULL, 'automaticsurveycreation', '\"1\"'),
+('19', '2', NULL, NULL, 'groupsearchbase', '\"@@LDAPGROUP@@\"'),
+('20', '2', NULL, NULL, 'groupsearchfilter', '\"@@LDAPGROUPFILTER@@\"'),
+('21', '2', NULL, NULL, 'allowInitialUser', '\"1\"');
+
