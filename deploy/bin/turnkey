@@ -224,6 +224,7 @@ def turnkey():
         else:
             content = content.replace('@@LDAPGROUP@@', "ou=groups,"+basedn)
             content = content.replace('@@LDAPGROUPFILTER@@', "(&(cn=teachers)(memberUid=$username))")
+	    ## TODO: for v6 and v7
         if (extrarights == "read"):
             content = content.replace('@@EXTRARIGHTS@@', "$iNewUID, 'surveys', array('create_p', 'read_p')");
         elif (extrarights == "write"):
