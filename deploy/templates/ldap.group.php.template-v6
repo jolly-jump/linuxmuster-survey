@@ -1,4 +1,4 @@
-# ./config/ldap-groups.php
+# ./config/ldap-groups.php v62
 $query_id++;
 $ldap_queries[$query_id]['ldapServerId'] = 0;
 $ldap_queries[$query_id]['name'] = 'Schüler der @@GROUP@@';

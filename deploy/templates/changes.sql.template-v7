@@ -1,4 +1,4 @@
-# ./config/changes.sql
+# ./config/changes.sql v70
 use lime_@@CONTAINERNAME@@;
 
 DROP TABLE IF EXISTS `lime_plugins`;

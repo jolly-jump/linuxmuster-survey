@@ -112,7 +112,9 @@ def turnkey():
         ldapserver = setup.get('setup', 'ldapserver')
         ldapserverip = setup.get('setup', 'ldapserverip')        
         ldapport = setup.get('setup', 'ldapport')
-        ldapreqcert = setup.get('setup', 'ldapreqcert')        
+        ldapreqcert = setup.get('setup', 'ldapreqcert')
+        binduser = setup.get('setup','binduser')
+        binduserpw = setup.get('setup','binduserpw')
         basedn = setup.get('setup', 'basedn')
         schoolname = setup.get('setup', 'schoolname')
         mysqlrootpw = setup.get('setup', 'mysqlrootpw')
@@ -176,14 +178,13 @@ def turnkey():
         content = content.replace('@@BASEDN@@', basedn)
         content = content.replace('@@GROUP@@', group)
         firstline = re.findall(r'# .*\n', content)[0]
-        outfile_group_temp = firstline.partition(' ')[2].replace('\n', '')
+        #outfile_group_temp = firstline.partition(' ')[2].replace('\n', '')
         content = content.split("\n",1)[1];
         participants += '\n';
         participants += '// Group %s \n' % group;
         participants += content
 
     conn.unbind()
-
 
     # create docker configuration
     print('Creating initial configuration from templates.')
@@ -239,17 +240,20 @@ def turnkey():
         # extract oufile path from first line
         # and remove first line
         firstline = re.findall(r'# .*\n', content)[0]
-        outfile = firstline.partition(' ')[2].replace('\n', '')
+        firstline_list = firstline.split(' ')
+        outfile = firstline_list[1].replace('\n', '')
+        if (len(firstline_list) > 2):
+            version = firstline_list[2].replace('\n','')
+            if ( version != lmnversion):
+                print(f"Infile {infile}: for the wrong version {version} -> ignoring.")
+                continue
+
         content = content.split("\n",1)[1];
         print(" Infile: " + infile + " -> " + outfile) 
         # write outfile
         if not writeTextfile(outfile, content, 'w'):
             return 1
 
-    try:
-        os.remove(outfile_group_temp)
-    except OSError:
-        pass
 
 
     # linking nginx config
